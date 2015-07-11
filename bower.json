@@ -1,0 +1,46 @@
+{
+  "name": "meow",
+  "version": "1.0.0",
+  "authors": [
+    "marty@anguro.pl"
+  ],
+  "description": "NPR - Application to track your Fartility",
+  "main": "index.html",
+  "license": "RESTRICTED",
+  "homepage": "meow.anguro.pl",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.2.0",
+    "bootstrap-sass-official": "~3.3.5",
+    "angular": "~1.3.16",
+    "jquery": "~2.1.1",
+    "jquery-ui": "~1.11.1",
+    "cropper": "*",
+    "angular-ui": "~0.4.0",
+    "angular-ui-router": "~0.2.11",
+    "font-awesome": "~4.2.0",
+    "jquery-mousewheel": "~3.1.12",
+    "moment": "~2.8.3",
+    "perfect-scrollbar": "~0.6.2",
+    "toastr": "~2.0.3",
+    "ngAnimate": "*",
+    "angular-animate": "~1.3.14",
+    "angular-sanitize": "~1.3.14",
+    "angular-storage": "~0.5.0",
+    "angular-touch": "~1.3.14",
+    "angular-ui-bootstrap": "~0.12.1",
+    "angular-loading-bar": "~0.7.1",
+    "angular-resource": "~1.3.14",
+    "angular-aside": "~1.1.3",
+    "angular-ui-switch": "~0.1.0",
+    "fontawesome": "~4.3.0",
+    "underscore": "~1.8.2"
+  }
+}
