@@ -1,13 +1,12 @@
 class CardsController < ApplicationController
   expose :cards
-  expose :card
 
   def index
     render json: cards
   end
 
   def show
-    render json: card
+    render json: Card[params[:id]]
   end
 
   def create

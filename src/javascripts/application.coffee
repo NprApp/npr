@@ -16,7 +16,7 @@ angular.module("npr.app").config ["$stateProvider", "$urlRouterProvider", ($stat
   $stateProvider.state
     name: "root.cards.card"
     url: "/:id"
-    controller: "CardsController"
+    controller: "CardController"
     controllerAs: "card"
     templateUrl: "modules/card/template.html"
 ]
