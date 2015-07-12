@@ -5,7 +5,6 @@ angular
   .controller "ApplicationController", [
     class Control
       appTitle: "NPR Track Your Fertitlity"
-
       constructor: ->
-        @appTitle = "Track It"
+        # @appTitle = "Track It"
   ]

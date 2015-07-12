@@ -23,9 +23,14 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+gem 'sequel'
+gem 'sequel-rails'
+
+gem 'rails-api'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+gem 'decent_exposure'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -33,6 +38,24 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+  gem 'pry'
+  gem 'pry-nav'
+  gem 'pry-remote'
+  gem 'pry-theme'
+  gem 'pry-rescue'
+  gem 'pry-rails'
+  gem 'pry-stack_explorer'
+
+  gem 'thin'
+
+  #gem 'better_errors'
+  gem 'binding_of_caller'
+
+  # Guard::RSpec automatically run your specs (much like autotest)
+  gem 'guard-rspec', require: false
+
+  #Guard is a command line tool to easily handle events on file system modifications.
+  gem 'guard'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
@@ -41,6 +64,8 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+
 end
 
 group :assets do

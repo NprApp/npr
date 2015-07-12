@@ -81,6 +81,10 @@ module.exports = function(grunt) {
         files: ['src/javascripts/**/*.html'],
         tasks: ['ngtemplates']
       },
+      postcss: {
+        files: ['public/css/*.css'],
+        tasks: ["postcss"]
+      },
       //            concat: {
       //                files: [
       //                    'src/libs/**/*.js'
@@ -121,12 +125,12 @@ module.exports = function(grunt) {
 
         processors: [
           // require('pixrem')(), // add fallbacks for rem units
-          // require('autoprefixer-core')({browsers: 'last 2 versions'}), // add vendor prefixes
+          require('autoprefixer-core')({browsers: 'last 2 versions'}), // add vendor prefixes
           // require('cssnano')() // minify the result
         ]
       },
       dist: {
-        src: 'public/app.css'
+        src: 'public/css/*.css'
       }
     },
 
@@ -135,6 +139,8 @@ module.exports = function(grunt) {
         files: {
           "public/js/app.min.js": [
             "src/javascripts/application.coffee",
+            'src/javascripts/factories/**/*.coffee',
+            'src/javascripts/models/**/*.coffee',
             'src/javascripts/modules/**/*.coffee',
           ]
         }
@@ -175,6 +181,7 @@ module.exports = function(grunt) {
           'bower_components/angular-aside/dist/js/angular-aside.min.js',
           'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
           'bower_components/angular-loading-bar/build/loading-bar.min.js',
+          'bower_components/restangular/dist/restangular.js',
           'bower_components/jquery/dist/jquery.js',
           'bower_components/toastr/toastr.min.js',
           'bower_components/moment/min/moment-with-locales.js',
@@ -205,6 +212,7 @@ module.exports = function(grunt) {
   });
   grunt.registerTask('default', [
     'sass:dev',
+    'postcss:dist',
     'coffee:dev',
     'ngtemplates',
     'concat:dev',

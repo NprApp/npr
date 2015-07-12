@@ -1,0 +1,7 @@
+cards
+<input class="form-control" ng-model="number" />
+<div class="btn btn-default" ng-click="cards.createCard(number)">Create card</div>
+
+<ul>
+  <li ng-repeat="card in cards.items"><a ng-href="#/cards/{{card.id}}">{{card.number}}</a></li>
+</ul>
