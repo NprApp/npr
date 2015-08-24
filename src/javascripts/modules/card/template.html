@@ -1,7 +1,7 @@
 <div class="records-list">
   <div class="records-list__item" ng-repeat="record in records track by $index" ng-class="record.record_type.code" ng-click="edit(record)">
     <bind-relation key="record.mucus_type"></bind-relation>
-    <bind-relation key="record.record_type"></bind-relation>
+    <bind-relation key="record.record_type.symbol"></bind-relation>
     <div class="records-list__item--date">
       <div class="records-list__item--date-start-of-month" ng-if="record.date | recordStartOfMonth">
         {{ record.date | recordStartOfMonth }}
@@ -20,7 +20,7 @@
         {{ record.bleeding_type }}
       </span>
     </div>
-    <div class="records-list__item--mucus-type" ng-hide="record.record_type.code == 'bleeding' && (record.bleeding_type == 'H' || record.bleeding_type == 'M')">
+    <div class="records-list__item--mucus-type">
       <span ng-hide="record.mucus_type.symbol == '0'">
         {{ record.mucus_type.symbol }}
       </span>
@@ -31,7 +31,7 @@
     <div class="records-list__item--frequency" ng-hide="(record.frequency || 0) == 0">
       X{{ record.frequency }}
     </div>
-    <div class="records-list__item--frequency" ng-show="(record.frequency || 0) == 0">
+    <div class="records-list__item--frequency" ng-show="(record.frequency || 0) == 0 && record.mucus_type.symbol != '0'">
       AD
     </div>
   </div>

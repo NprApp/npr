@@ -7,7 +7,8 @@ class RecordsController < ApplicationController
     render json: RecordQuery.new(id: record.id).query.first
   end
   def update
-    record = Record[params[:id]].update(parsed_params)
+    record = Record[params[:id]]
+    record.update(parsed_params)
     render json: RecordQuery.new(id: record.id).query.first
   end
   def destroy

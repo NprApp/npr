@@ -9,6 +9,7 @@ angular.module("npr.app")
           return unless type == "manyToOne"
           foreign_key = "#{key}_id" unless foreign_key
           @attributes[foreign_key] = "integer"
+          # console.log @[foreign_key]
         )
 
       save: ->
@@ -44,6 +45,7 @@ angular.module("npr.app")
         foreign_key = "#{relation}_id" unless foreign_key
         return if @[relation] && @[relation].id == @[foreign_key]
         @[relation] = @store(relation).get(@[foreign_key])
+        console.log @.id, @[relation]
         foreign_key
 ]
   .directive "bindRelation", ["$parse", "$compile", ($parse, $compile) ->
@@ -51,11 +53,13 @@ angular.module("npr.app")
     link: (scope, element, attributes) ->
       { key, render } = attributes
       keys = key.split(".")
+      # console.log keys
       _.each(keys, (value, index) ->
         binding = keys.slice(0, index).join(".")
         if foreign_key = $parse(binding)(scope)?._calculateRelationForBaseModel?(value)
+          # console.log "#{binding}.#{foreign_key}"
           scope.$watch("#{binding}.#{foreign_key}", () ->
-            console.log 'watchit'
+            # console.log 'watchit'
             $parse(binding)(scope)?._calculateRelationForBaseModel?(value)
           )
       )
