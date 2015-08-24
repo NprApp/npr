@@ -1,0 +1,6 @@
+.btn-circle {
+  @include circle(30px);
+  padding: 0;
+  line-height: 30px;
+  text-align: center;
+}

@@ -1,0 +1,44 @@
+$cards-width: 220px;
+
+.cards-wrapper {
+  @include fill-absolute();
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+.cards {
+  position: relative;
+  width: $cards-width;
+  border-right: 1px solid $border-color;
+  &__title {
+    padding: 0 10px;
+    h5 {
+      text-transform: uppercase;
+      color: #888;
+    }
+  }
+  &--create {
+    @include absolute(top 5px right 10px);
+  }
+  &__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    li a {
+      line-height: 34px;
+      display: block;
+      padding: 0 10px;
+      font-weight: 300;
+      &.active, &:hover {
+        text-decoration: none;
+        background: $active-bg;
+        color: $white;
+      }
+    }
+  }
+}
+.card {
+  flex: 1;
+  background: darken($white, 10%);
+  overflow: auto;
+}

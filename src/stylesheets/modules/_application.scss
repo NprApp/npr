@@ -1,0 +1,52 @@
+.application {
+  @include fill-absolute();
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  overflow: hidden;
+
+  &__header {
+    height: $header-height;
+    border-bottom: 1px solid $border-color;
+    padding-left: 210px;
+    &__logo {
+      @include absolute(top 0 left 0);
+      padding-left: 10px;
+      .lighter {
+        line-height: $header-height * .7;
+        font-size: 20px;
+        font-weight: 300;
+      }
+      .sub-bolder {
+        line-height: $header-height * .3;
+        margin-top: -10px;
+        font-size: 10px;
+        font-weight: 600;
+      }
+    }
+    &__item {
+      display: inline-block;
+      padding: 0 3px;
+      a {
+        line-height: $header-height - 16;
+        margin: 8px 0;
+        display: block;
+        padding: 0 10px;
+        color: $header-color;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 11px;
+        &.active, &:hover {
+          border-radius: 5px;
+          color: $active-bg;
+        }
+      }
+    }
+  }
+  &__content {
+    position: relative;
+    flex: 1;
+    overflow: auto;
+  }
+}
