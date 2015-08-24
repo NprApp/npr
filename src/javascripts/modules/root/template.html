@@ -1,3 +1,4 @@
-<ng-include src="'modules/header/template.html'">
-</ng-include>
-{{ cl }}
+<div class="application__header" ng-include src="'modules/header/template.html'" replace="true">
+</div>
+<div ui-view class="application__content">
+</div>

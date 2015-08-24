@@ -1,0 +1,91 @@
+@mixin sizing($args) {
+  @if length($args) == 2 {
+    width: nth($args, 1);
+    height: nth($args, 2);
+  }
+  @else {
+    width: $args;
+    height: $args;
+  }
+}
+
+@mixin clear {
+  margin: 0;
+  padding: 0;
+}
+
+@mixin quantity($args) {
+  @warn "Quantity mixin will be depraceted";
+  @include sizing($args);
+}
+
+@mixin circle($args) {
+  @include sizing($args);
+  border-radius: 50%;
+}
+
+@mixin rounded-box($size, $corners) {
+  @include sizing($size);
+  @include inline-border-radius($corners);
+}
+
+@mixin inline-border-radius($args) {
+  @if length($args) == 4 {
+    border-top-left-radius: nth($args, 1);
+    border-top-right-radius: nth($args, 2);
+    border-bottom-right-radius: nth($args, 3);
+    border-bottom-left-radius: nth($args, 4);
+  }
+  @else if length($args) == 2 {
+    border-top-left-radius: nth($args, 1);
+    border-top-right-radius: nth($args, 1);
+    border-bottom-left-radius: nth($args, 2);
+    border-bottom-right-radius: nth($args, 2);
+  }
+  @else if length($args) == 1 {
+    border-radius: $args;
+  }
+}
+
+@mixin _position($position, $args) {
+  @each $dir in top, left, bottom, right {
+    $i: index($args, $dir);
+    @if $i {
+      #{$dir}: nth($args, $i + 1);
+    }
+  }
+  position: $position;
+}
+
+@mixin absolute($args) {
+  @include _position(absolute, $args);
+}
+@mixin relative($args) {
+  @include _position(relative, $args);
+}
+@mixin fixed($args) {
+  @include _position(fixed, $args);
+}
+@mixin fill-absolute($margin: 0) {
+  @include absolute(top $margin right $margin bottom $margin left $margin);
+}
+@mixin centered-vertically {
+  @include transform(translateY(-50%));
+  position: relative;
+  top: 50%;
+  display: block;
+}
+
+@mixin rectangle-center($args) {
+  $width: nth($args, 1);
+  @if length($args) == 1 {
+    $height: nth($args, 1);
+  }
+  @else {
+    $height: nth($args, 2);
+  }
+  width: $width;
+  height: $height;
+  line-height: $height;
+  text-align: center;
+}

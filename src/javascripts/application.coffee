@@ -1,22 +1,21 @@
-angular.module("npr.app",["ui.router", "ngResource", "ngAnimate", "restangular"])
-angular.module("npr.app").config ["$stateProvider", "$urlRouterProvider", ($stateProvider,  $urlRouterProvider) ->
-  $urlRouterProvider.otherwise('/')
+angular.module("npr.app",[
+  "ui.router",
+  "ngResource",
+  "ngAnimate",
+  "restangular",
+  "angular-cache",
+  "underscore",
+  "angular-data",
+  "angular-modal",
+  "app-filters",
+  "720kb.datepicker"])
+angular.module("npr.app").config ["$stateProvider", "$urlRouterProvider", "RestangularProvider", ($stateProvider,  $urlRouterProvider, RestangularProvider) ->
+  $urlRouterProvider.otherwise('/cards')
   $stateProvider.state
     name: "root"
     url: "/"
     controller: "RootController"
     controllerAs: "root"
     templateUrl: "modules/root/template.html"
-  $stateProvider.state
-    name: "root.cards"
-    url: "cards"
-    controller: "CardsController"
-    controllerAs: "cards"
-    templateUrl: "modules/cards/template.html"
-  $stateProvider.state
-    name: "root.cards.card"
-    url: "/:id"
-    controller: "CardController"
-    controllerAs: "card"
-    templateUrl: "modules/card/template.html"
+    abstract: true
 ]

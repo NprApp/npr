@@ -131,7 +131,8 @@ CREATE TABLE records (
     bleeding_type text,
     peak_day integer,
     mucus_type_id integer,
-    frequency integer
+    frequency integer,
+    details text
 );
 
 
@@ -271,3 +272,4 @@ SET search_path TO "$user", public;
 INSERT INTO "schema_migrations" ("filename") VALUES ('20150711214223_create_cards.rb');
 INSERT INTO "schema_migrations" ("filename") VALUES ('20150712192403_create_records.rb');
 INSERT INTO "schema_migrations" ("filename") VALUES ('20150712201138_change_mucus_types_rename_column_fortile.rb');
+INSERT INTO "schema_migrations" ("filename") VALUES ('20150822195932_add_details_to_record.rb');

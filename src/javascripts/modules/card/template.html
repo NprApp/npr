@@ -1,1 +1,41 @@
-No. {{ card.model.number }}
+<div class="records-list">
+  <div class="records-list__item" ng-repeat="record in records track by $index" ng-class="record.record_type.code" ng-click="edit(record)">
+    <bind-relation key="record.mucus_type"></bind-relation>
+    <bind-relation key="record.record_type"></bind-relation>
+    <div class="records-list__item--date">
+      <div class="records-list__item--date-start-of-month" ng-if="record.date | recordStartOfMonth">
+        {{ record.date | recordStartOfMonth }}
+      </div>
+      <div class="records-list__item--date-day-of-month">
+        {{ record.date | recordDayOfMonth}}
+      </div>
+      <div class="records-list__item--date-day-of-week">
+        {{ record.date | recordDayOfWeek}}
+      </div>
+    </div>
+    <!-- <div class="records-list__item--destroy" ng-click="destroy(record)">&times;</div> -->
+    <div class="records-list__item--sticker"></div>
+    <div class="records-list__item--bleeding-type">
+      <span ng-show="record.record_type.code == 'bleeding'">
+        {{ record.bleeding_type }}
+      </span>
+    </div>
+    <div class="records-list__item--mucus-type" ng-hide="record.record_type.code == 'bleeding' && (record.bleeding_type == 'H' || record.bleeding_type == 'M')">
+      <span ng-hide="record.mucus_type.symbol == '0'">
+        {{ record.mucus_type.symbol }}
+      </span>
+      <span ng-show="(record.mucus_type.symbol || '0') == '0'">
+        0AD
+      </span>
+    </div>
+    <div class="records-list__item--frequency" ng-hide="(record.frequency || 0) == 0">
+      X{{ record.frequency }}
+    </div>
+    <div class="records-list__item--frequency" ng-show="(record.frequency || 0) == 0">
+      AD
+    </div>
+  </div>
+  <div class="records-list__item records-list__item--new" ng-click="new()">
+  </div>
+</div>
+<ui-modal toggler="view.newModalVisible" ok-action="save" cancel-action="cancel" src="modules/card/views/new.html"></ui-modal>

@@ -1,2 +1,15 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700&subset=latin,latin-ext);
 @import "partials/mixins";
 @import "partials/variables";
+@import "partials/typography";
+
+@import "components/page";
+@import "components/buttons";
+
+@import "modules/application";
+@import "modules/cards";
+@import "modules/records";
+
+.table-fixed {
+  table-layout: fixed;
+}

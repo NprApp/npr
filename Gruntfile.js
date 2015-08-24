@@ -70,12 +70,10 @@ module.exports = function(grunt) {
       sass: {
         files: ['src/stylesheets/**/*.sass', 'src/stylesheets/**/*.scss'],
         tasks: 'sass:dev',
-        spawn: false
       },
       coffee: {
         files: ['src/javascripts/**/*.coffee'],
         tasks: ['coffee:dev'],
-        spawn: true
       },
       ngtemplates: {
         files: ['src/javascripts/**/*.html'],
@@ -85,16 +83,9 @@ module.exports = function(grunt) {
         files: ['public/css/*.css'],
         tasks: ["postcss"]
       },
-      //            concat: {
-      //                files: [
-      //                    'src/libs/**/*.js'
-      //                ],
-      //                tasks: ['concat:dev']
-      //            },
       gruntfile: {
         files: ['Gruntfile.js']
       }
-      //
     },
 
     sass: {
@@ -104,19 +95,22 @@ module.exports = function(grunt) {
           lineNumbers: true
         },
         files: [{
-          // "css/application.css": "src/stylesheets/application.sass",
           expand: true,
           cwd: 'src/stylesheets/',
           src: ['*.sass','*.scss'],
           dest: 'public/css',
           ext: '.css'
-        // }, {
-          // "css/bootstrap.css": "src/stylesheets/bootstrap.scss"
         }]
       },
       prod: {}
     },
-
+    copy: {
+      main: {
+        files: [
+          {expand: true, cwd: 'bower_components/font-awesome/', src: ['fonts/*'], dest: 'public/', filter: 'isFile'}
+        ]
+      }
+    },
     postcss: {
       options: {
         map: {
@@ -124,9 +118,7 @@ module.exports = function(grunt) {
         },
 
         processors: [
-          // require('pixrem')(), // add fallbacks for rem units
           require('autoprefixer-core')({browsers: 'last 2 versions'}), // add vendor prefixes
-          // require('cssnano')() // minify the result
         ]
       },
       dist: {
@@ -139,8 +131,15 @@ module.exports = function(grunt) {
         files: {
           "public/js/app.min.js": [
             "src/javascripts/application.coffee",
+            'src/javascripts/services/base.coffee',
+            'src/javascripts/services/**/*.coffee',
             'src/javascripts/factories/**/*.coffee',
+            'src/javascripts/directives/**/*.coffee',
+            'src/javascripts/components/**/*.coffee',
+            'src/javascripts/models/base.coffee',
             'src/javascripts/models/**/*.coffee',
+            'src/javascripts/filters/base.coffee',
+            'src/javascripts/filters/**/*.coffee',
             'src/javascripts/modules/**/*.coffee',
           ]
         }
@@ -171,6 +170,7 @@ module.exports = function(grunt) {
     concat: {
       dev: {
         src: [
+          'bower_components/jquery/dist/jquery.js',
           'bower_components/angular/angular.js',
           'bower_components/angular-ui-router/release/angular-ui-router.js',
           'bower_components/angular-ui-switch/angular-ui-switch.min.js',
@@ -179,16 +179,18 @@ module.exports = function(grunt) {
           'bower_components/angular-sanitize/angular-sanitize.min.js',
           'bower_components/angular-storage/build/angular-storage.min.js',
           'bower_components/angular-aside/dist/js/angular-aside.min.js',
+          'bower_components/angular-cache/dist/angular-cache.min.js',
           'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
           'bower_components/angular-loading-bar/build/loading-bar.min.js',
+          'bower_components/angular-underscore-module/angular-underscore-module.js',
           'bower_components/restangular/dist/restangular.js',
-          'bower_components/jquery/dist/jquery.js',
           'bower_components/toastr/toastr.min.js',
           'bower_components/moment/min/moment-with-locales.js',
           'bower_components/jquery-mousewheel/jquery.mousewheel.min.js',
           'bower_components/perfect-scrollbar/min/perfect-scrollbar.min.js',
           'bower_components/underscore/underscore-min.js',
           'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js',
+          'bower_components/angularjs-datepicker/dist/angular-datepicker.min.js',
         ],
         dest: 'public/js/libs.js'
       },
@@ -196,6 +198,7 @@ module.exports = function(grunt) {
         src: [
           'bower_components/perfect-scrollbar/min/perfect-scrollbar.min.css',
           'bower_components/fontawesome/css/font-awesome.min.css',
+          'bower_components/angularjs-datepicker/dist/angular-datepicker.min.css',
           'bower_components/angular-ui-switch/angular-ui-switch.min.css',
           'bower_components/angular-loading-bar/build/loading-bar.min.css',
           'bower_components/toastr/toastr.min.css',
@@ -217,6 +220,7 @@ module.exports = function(grunt) {
     'ngtemplates',
     'concat:dev',
     'concat:csslibs',
+    'copy:main',
     'watch'
   ]);
   grunt.registerTask('build', [
@@ -235,6 +239,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-shell-spawn'); // rails starting
   grunt.loadNpmTasks('grunt-exec');
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-uglify');

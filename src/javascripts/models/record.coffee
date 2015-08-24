@@ -1,4 +1,14 @@
 angular.module("npr.app")
-  .factory "Record", ["Restangular", (Restangular) ->
-    Restangular.all("records")
+  .service "model.record", ["BaseModel", (BaseModel) ->
+    class Record extends BaseModel
+      _name: "record"
+      attributes:
+        record_type: "manyToOne:type_id"
+        mucus_type: "manyToOne"
+        card: "manyToOne"
+        bleeding_type: "string"
+        date: "date"
+        frequency: "integer"
+        peak_day: "integer"
+        details: "string"
 ]

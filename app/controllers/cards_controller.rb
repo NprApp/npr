@@ -1,8 +1,6 @@
 class CardsController < ApplicationController
-  expose :cards
-
   def index
-    render json: cards
+    render json: CardQuery.new.query
   end
 
   def show
@@ -10,7 +8,6 @@ class CardsController < ApplicationController
   end
 
   def create
-    sleep 1
-    render json: Card.create(params[:card])
+    render json: Card.create(number: (Card.max(:number) || 0) + 1)
   end
 end

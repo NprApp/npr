@@ -6,6 +6,7 @@ class CardQuery
     Card.
       select_all(:cards).
       select_append(:dates__min_date, :dates__max_date).
-      left_join(RecordQuery.new.min_max.as(:dates), dates__card_id: :cards__id)
+      left_join(RecordQuery.new.min_max.as(:dates), dates__card_id: :cards__id).
+      order(:number)
   end
 end

@@ -41,6 +41,10 @@
     "angular-aside": "~1.1.3",
     "angular-ui-switch": "~0.1.0",
     "fontawesome": "~4.3.0",
-    "underscore": "~1.8.2"
+    "underscore": "~1.8.2",
+    "bootstrap-datepicker": "~1.4.0",
+    "angular-cache": "~4.3.2",
+    "angular-underscore-module": "~1.0.1",
+    "angularjs-datepicker": "~0.2.9"
   }
 }

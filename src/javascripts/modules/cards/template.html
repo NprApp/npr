@@ -1,10 +1,22 @@
-cards
-<input class="form-control" ng-model="number" />
-<div class="btn btn-default" ng-click="cards.createCard(number)">Create card</div>
-
-<ul>
-  <li ng-repeat="card in cards.items"><a ng-href="#/cards/{{card.id}}">{{card.number}}</a></li>
-</ul>
-
-<div ui-view>
+<div class="cards-wrapper">
+  <div class="cards">
+    <div class="cards__title">
+      <h5>Cards</h5>
+    </div>
+    <ul class="cards__list">
+      <li ng-repeat="card in items track by $index">
+        <a href ui-sref="root.cards.card({id: card.id})" ui-sref-active="active">
+          <span ng-show="card.min_date || card.max_date">
+            {{card.min_date}} - {{card.max_date}}
+          </span>
+          <span ng-hide="card.min_date || card.max_date">
+            No records
+          </span>
+        </a>
+      </li>
+      <li class="cards__list--new"><a href ng-click="create()">Add new +</a></li>
+    </ul>
+  </div>
+  <div ui-view class="card">
+  <div>
 <div>
