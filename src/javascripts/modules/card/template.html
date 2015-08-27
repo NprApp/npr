@@ -1,4 +1,4 @@
-<div class="records-list">
+  <div class="records-list">
   <div class="records-list__item" ng-repeat="record in records track by $index" ng-class="record.record_type.code" ng-click="edit(record)">
     <bind-relation key="record.mucus_type"></bind-relation>
     <bind-relation key="record.record_type.symbol"></bind-relation>
@@ -13,7 +13,7 @@
         {{ record.date | recordDayOfWeek}}
       </div>
     </div>
-    <!-- <div class="records-list__item--destroy" ng-click="destroy(record)">&times;</div> -->
+    <div class="records-list__item--destroy" ng-click="destroy(record)">&times;</div>
     <div class="records-list__item--sticker"></div>
     <div class="records-list__item--bleeding-type">
       <span ng-show="record.record_type.code == 'bleeding'">

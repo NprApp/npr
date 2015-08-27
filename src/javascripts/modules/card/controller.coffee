@@ -2,13 +2,14 @@
 
 angular.module("npr.app").controller "CardController", [
   "$scope",
+  "$timeout",
   "Store",
   "record_types",
   "mucus_types",
   "records",
   "$stateParams",
   "BleedingTypes"
-  ($scope, Store, record_types, mucus_types, records, $stateParams, BleedingTypes) ->
+  ($scope, $timeout, Store, record_types, mucus_types, records, $stateParams, BleedingTypes) ->
     $scope.model = Store("card").get($stateParams.id)
     $scope.types = record_types
     $scope.mucus_types = mucus_types
@@ -26,15 +27,20 @@ angular.module("npr.app").controller "CardController", [
         if isNew
           $scope.records.push $scope.current
         $scope.view.newModalVisible = false
-        $scope.$apply()
+        $timeout(->
+          return
+        )
         data
 
     $scope.destroy = (record) ->
-      record.destroy().then =>
+      record.destroy().then (data) =>
         index = $scope.records.indexOf record
         if index > -1
           $scope.records.splice index, 1
-        $scope.$apply()
+        $timeout(->
+          return
+        , 800)
+        data
 
     $scope.new = ->
       maxDate = $scope.records.map( (record) -> record.date ).sort().reverse()[0]
@@ -46,6 +52,7 @@ angular.module("npr.app").controller "CardController", [
       $scope.view.newModalVisible = true
 
     $scope.edit = (record) ->
+      return if record.$isDestroyed
       $scope.current = record
       $scope.view.newModalVisible = true
 

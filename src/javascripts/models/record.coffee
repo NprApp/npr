@@ -11,4 +11,10 @@ angular.module("npr.app")
         frequency: "integer"
         peak_day: "integer"
         details: "string"
+      _afterSave: ->
+        @_calculateRelationForBaseModel('card') unless @card
+        @card.reload()
+
+      _afterDestroy: ->
+        @_afterSave()
 ]

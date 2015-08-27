@@ -4,7 +4,7 @@ class CardsController < ApplicationController
   end
 
   def show
-    render json: Card[params[:id]]
+    render json: CardQuery.new.query.where(id: [params[:id]]).first
   end
 
   def create

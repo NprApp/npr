@@ -1,5 +1,5 @@
 angular.module("angular-data", ["angular-cache"])
-  .service "Store", ["$http", "CacheService", "_", ($http, CacheService, _) ->
+  .service "Store", ["$http", "CacheService", "_", "$rootScope", "$timeout", ($http, CacheService, _, $rootScope, $timeout) ->
     class Store
       constructor: (name, pluralize, baseUrl) ->
         @_name = name
@@ -33,8 +33,9 @@ angular.module("angular-data", ["angular-cache"])
         else
           promise = $http.get(@_buildUrl(), params: params).then (resource) =>
             _.each resource.data, (record) =>
-              promise.$object.push new @_model(record)
-              @_cache.put("#{@_name}.map.#{record.id}", record)
+              model = new @_model(record)
+              promise.$object.push model
+              @_cache.put("#{@_name}.map.#{record.id}", model)
             unless params
               @_cache.put("#{@_name}.data", promise)
               @_cache.put("#{@_name}.data.$object", promise.$object)
@@ -72,14 +73,18 @@ angular.module("angular-data", ["angular-cache"])
         unless record.id
           @destroyRecord(record)
 
-      get: (id) ->
+      get: (id, force) ->
         return null unless id
         record_object = @_cache.get("#{@_name}.map.#{id}")
-        return record_object if record_object
+        return record_object if record_object && !force
         promise = $http.get(@_buildUrl(id: id))
-        record_object = new @_model(promise.$object)
-        promise.then (record) =>
-          record_object.setProperties(record.data)
+        record_object = new @_model(promise.$object) unless force
+        promise.then (record) ->
+          record_object._setProperties(record.data)
+          $rootScope.$applyAsync( ($rootScope)->
+            console.log record_object.max_date
+          , 100)
+          record
         @_cache.put("#{@_name}.map.#{id}", record_object)
         record_object
 

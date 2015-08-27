@@ -1,15 +1,14 @@
 angular.module("npr.app")
-  .service "BaseModel", ["Store", "_", "$rootScope", (Store, _, $rootScope) ->
+  .service "BaseModel", ["Store", "_", "$rootScope", "$timeout", (Store, _, $rootScope, $timeout) ->
     class Base
       store: Store
       constructor: (data) ->
-        @setProperties(data)
+        @_setProperties(data)
         _.each(_.keys(@attributes), (key) =>
           [type, foreign_key] = @attributes[key].split(":")
           return unless type == "manyToOne"
           foreign_key = "#{key}_id" unless foreign_key
           @attributes[foreign_key] = "integer"
-          # console.log @[foreign_key]
         )
 
       save: ->
@@ -20,32 +19,53 @@ angular.module("npr.app")
         )
         if @id
           @store(@_name).update(@id, data).then (record) =>
-            @setProperties(record)
+            @_setProperties(record)
+            @_afterSave()
+            record
         else
           @store(@_name).create(data).then (record) =>
-            @setProperties(record.data)
+            @_setProperties(record.data)
+            @_afterSave()
+            record
 
-      setProperties: (data) ->
+      reload: ->
+        @store(@_name).get(@id, true)
+        return
+
+      _setProperties: (data) ->
         angular.extend(@, data)
+        @_originalData = data
+
+      _restore: ->
+        angular.extend(@, @_originalData)
 
       destroy: ->
+        @$isDestroyed = true
         @_willDestroy()
-        @store(@_name).destroy(@id)
+        @store(@_name).destroy(@id).then =>
+          @_afterDestroy()
 
       reject: ->
+        @_restore()
 
       isNew: ->
         !@id
 
       _willDestroy: ->
 
+      _afterSave: ->
+        return
+
+      _afterDestriy: ->
+        return
+
       _calculateRelationForBaseModel: (relation) ->
+        return unless @attributes[relation]
         [type, foreign_key] = @attributes[relation].split(":")
         return unless type == "manyToOne"
         foreign_key = "#{relation}_id" unless foreign_key
         return if @[relation] && @[relation].id == @[foreign_key]
         @[relation] = @store(relation).get(@[foreign_key])
-        console.log @.id, @[relation]
         foreign_key
 ]
   .directive "bindRelation", ["$parse", "$compile", ($parse, $compile) ->
@@ -53,13 +73,10 @@ angular.module("npr.app")
     link: (scope, element, attributes) ->
       { key, render } = attributes
       keys = key.split(".")
-      # console.log keys
       _.each(keys, (value, index) ->
         binding = keys.slice(0, index).join(".")
         if foreign_key = $parse(binding)(scope)?._calculateRelationForBaseModel?(value)
-          # console.log "#{binding}.#{foreign_key}"
           scope.$watch("#{binding}.#{foreign_key}", () ->
-            # console.log 'watchit'
             $parse(binding)(scope)?._calculateRelationForBaseModel?(value)
           )
       )
