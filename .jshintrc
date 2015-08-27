@@ -1,13 +1,16 @@
 {
-  "globalstrict": true,
+  "bitwise": true,
+  "browser": true,
+  "curly": true,
+  "eqeqeq": true,
+  "esnext": true,
+  "latedef": true,
+  "noarg": true,
+  "node": true,
+  "strict": true,
+  "undef": true,
+  "unused": true,
   "globals": {
-    "angular": false,
-    "describe": false,
-    "it": false,
-    "expect": false,
-    "beforeEach": false,
-    "afterEach": false,
-    "module": false,
-    "inject": false
+    "angular": false
   }
 }
