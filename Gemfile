@@ -27,6 +27,11 @@ gem 'sequel'
 gem 'sequel-rails'
 gem 'pg'
 gem 'rails-api'
+gem 'devise'
+gem 'sequel-devise'
+gem 'orm_adapter'
+gem 'orm_adapter-sequel'
+gem 'simple_token_authentication'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -45,7 +50,7 @@ group :development, :test do
   gem 'pry-rescue'
   gem 'pry-rails'
   gem 'pry-stack_explorer'
-
+  gem 'letter_opener'
   gem 'thin'
 
   #gem 'better_errors'
