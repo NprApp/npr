@@ -3,6 +3,20 @@ Rails.application.routes.draw do
   resources :records
   resources :record_types
   resources :mucus_types
+  devise_for :users,
+    controllers: {
+      sessions: 'sessions',
+      registrations: 'registrations',
+      confirmations: 'confirmations'
+    }
+  as :user do
+    post '/sign_up' => 'registrations#create'
+    post '/sign_in' => 'sessions#create'
+    post '/confirm' => 'confirmations#create'
+  end
+
+  resources :users
+  root to: "home#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

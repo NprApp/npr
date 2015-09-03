@@ -165,6 +165,49 @@ CREATE TABLE schema_migrations (
 
 
 --
+-- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE users (
+    id integer NOT NULL,
+    email text NOT NULL,
+    encrypted_password text DEFAULT ''::text NOT NULL,
+    reset_password_token text,
+    reset_password_sent_at timestamp without time zone,
+    remember_created_at timestamp without time zone,
+    sign_in_count integer DEFAULT 0 NOT NULL,
+    current_sign_in_at timestamp without time zone,
+    last_sign_in_at timestamp without time zone,
+    current_sign_in_ip text,
+    last_sign_in_ip text,
+    authentication_token text,
+    is_admin boolean DEFAULT false NOT NULL,
+    confirmation_token text,
+    confirmed_at timestamp without time zone,
+    confirmation_sent_at timestamp without time zone
+);
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -190,6 +233,13 @@ ALTER TABLE ONLY record_types ALTER COLUMN id SET DEFAULT nextval('record_types_
 --
 
 ALTER TABLE ONLY records ALTER COLUMN id SET DEFAULT nextval('records_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
 --
@@ -241,6 +291,30 @@ ALTER TABLE ONLY schema_migrations
 
 
 --
+-- Name: users_confirmation_token_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_confirmation_token_key UNIQUE (confirmation_token);
+
+
+--
+-- Name: users_email_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_email_key UNIQUE (email);
+
+
+--
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: records_card_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -273,3 +347,5 @@ INSERT INTO "schema_migrations" ("filename") VALUES ('20150711214223_create_card
 INSERT INTO "schema_migrations" ("filename") VALUES ('20150712192403_create_records.rb');
 INSERT INTO "schema_migrations" ("filename") VALUES ('20150712201138_change_mucus_types_rename_column_fortile.rb');
 INSERT INTO "schema_migrations" ("filename") VALUES ('20150822195932_add_details_to_record.rb');
+INSERT INTO "schema_migrations" ("filename") VALUES ('20150827191040_create_users.rb');
+INSERT INTO "schema_migrations" ("filename") VALUES ('20150901194549_add_comfirmable_to_users.rb');
