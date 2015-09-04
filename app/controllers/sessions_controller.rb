@@ -18,7 +18,7 @@ class SessionsController < Devise::SessionsController
 
     sign_in(resource_name, resource)
     render json: {
-          user_id: resource.id,
+          id: resource.id,
           user_email: resource.email,
           user_token: resource.authentication_token,
           user_admin: resource.is_admin

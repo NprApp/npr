@@ -176,6 +176,7 @@ module.exports = function(grunt) {
           'bower_components/angular-ui-switch/angular-ui-switch.min.js',
           'bower_components/angular-animate/angular-animate.min.js',
           'bower_components/angular-resource/angular-resource.min.js',
+          'bower_components/angular-cookies/angular-cookies.min.js',
           'bower_components/angular-sanitize/angular-sanitize.min.js',
           'bower_components/angular-storage/build/angular-storage.min.js',
           'bower_components/angular-aside/dist/js/angular-aside.min.js',
@@ -191,6 +192,7 @@ module.exports = function(grunt) {
           'bower_components/underscore/underscore-min.js',
           'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js',
           'bower_components/angularjs-datepicker/dist/angular-datepicker.min.js',
+          'bower_components/ng-token-auth/dist/ng-token-auth.min.js',
         ],
         dest: 'public/js/libs.js'
       },
