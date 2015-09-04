@@ -1,4 +1,4 @@
-task :deploy_application => ['deploy:migrate', 'deploy:restart']
+task :deploy => ['deploy:migrate', 'deploy:restart']
 
 namespace :deploy do
   APP_NAME = 'nprapp'
