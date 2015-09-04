@@ -1,7 +1,9 @@
 {
   "name": "npr",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "bower": "1.5.2"
+  },
   "devDependencies": {
     "autoprefixer-core": "^5.2.0",
     "grunt": "^0.4.1",
@@ -48,6 +50,6 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "postinstall": "./node_modules/bower/bin/bower install"
   }
 }

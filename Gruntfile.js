@@ -225,13 +225,14 @@ module.exports = function(grunt) {
     'copy:main',
     'watch'
   ]);
-  grunt.registerTask('build', [
-    'sass:prod',
-    'coffee:prod',
-    'uglify:app',
+  grunt.registerTask('heroku', [
+    'sass:dev',
+    'postcss:dist',
+    'coffee:dev',
     'ngtemplates',
-    'concat:prod',
-    'watch'
+    'concat:dev',
+    'concat:csslibs',
+    'copy:main'
   ]);
 
   grunt.registerTask('css', ['sass']);
