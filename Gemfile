@@ -40,14 +40,14 @@ gem 'decent_exposure'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'pry'
+gem 'pry-nav'
+gem 'pry-remote'
+gem 'pry-theme'
+gem 'pry-rescue'
+gem 'pry-rails'
+gem 'pry-stack_explorer'
 group :development, :test do
-  gem 'pry'
-  gem 'pry-nav'
-  gem 'pry-remote'
-  gem 'pry-theme'
-  gem 'pry-rescue'
-  gem 'pry-rails'
-  gem 'pry-stack_explorer'
   gem 'letter_opener'
   gem 'thin'
 
