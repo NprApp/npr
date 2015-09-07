@@ -2,9 +2,6 @@ class User < Sequel::Model
   plugin :devise
   devise :database_authenticatable, :timeoutable, :trackable, :registerable, :confirmable, :validatable
 
-  # acts_as_token_authenticatable
-
-
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if email = conditions.delete(:email)

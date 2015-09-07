@@ -18,15 +18,12 @@ angular.module("npr.app").config [
   # "$authProvider",
   ($stateProvider,  $urlRouterProvider, $httpProvider, $authProvider) ->
     $urlRouterProvider.otherwise('/')
-    # $authProvider.configure
-      # apiUrl: 'http://localhost:3000'
-
     $httpProvider.interceptors.push(["$cookies", ($cookies) ->
       request: (config) ->
-        if !$cookies.xUserToken || !$cookies.xUserEmail
+        if !$cookies.get("xUserToken") || !$cookies.get("xUserEmail")
           return config
-        config.headers["X-User-Token"] = $cookies.xUserToken
-        config.headers["X-User-Email"] = $cookies.xUserEmail
+        config.headers["X-User-Token"] = $cookies.get("xUserToken")
+        config.headers["X-User-Email"] = $cookies.get("xUserEmail")
         config
     ])
 
@@ -36,9 +33,10 @@ angular.module("npr.app").config [
       controller: "RootController"
       controllerAs: "root"
       templateUrl: "modules/root/template.html"
-      # abstract: true
     $stateProvider.state
       name: "login"
       url: "/login"
-      template: "loginpage"
+      controller: "LoginController"
+      templateUrl: "modules/login/template.html"
+
 ]

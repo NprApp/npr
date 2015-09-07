@@ -1,0 +1,11 @@
+<div>
+  <form ng-submit="signIn()" name="signInForm">
+    <input class="form-control" ng-model="user.email" required name="email" />
+    <input class="form-control" type="password" ng-model="user.password" required name="password" />
+    <div ng-if="userError" class="alert alert-danger">
+      {{ userError }}
+    </div>
+    <button type="submit" class="btn btn-primary" ng-disabled="!signInForm.$valid">Sign In</button>
+
+  </form>
+</div>

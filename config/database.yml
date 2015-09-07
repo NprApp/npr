@@ -22,4 +22,5 @@ test:
 
 production:
   <<: *default
+  database: npr
   url: <%= ENV['DATABASE_URL'] %>
