@@ -2,25 +2,32 @@ $cards-width: 220px;
 
 .cards-wrapper {
   @include fill-absolute();
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
+  // display: flex;
+  // flex-direction: row;
+  // align-items: stretch;
+  background: darken($white, 4%);
+  overflow: auto;
 }
 .cards {
   position: relative;
-  width: $cards-width;
-  border-right: 1px solid $border-color;
+  margin: 0 auto;
+  max-width: 960px;
   &__title {
     padding: 0 10px;
     h5 {
-      text-transform: uppercase;
-      color: #888;
+      font-size: 26px;
+      font-weight: 300;
+      color: #555;
     }
   }
   &--create {
     @include absolute(top 5px right 10px);
   }
   &__list {
+    max-width: 960px;
+    background: $white;
+    border: 1px solid $border-color;
+    box-shadow: 0 3px 5px 0 rgba($black, .2);
     margin: 0;
     padding: 0;
     list-style: none;
@@ -40,5 +47,4 @@ $cards-width: 220px;
 .card {
   flex: 1;
   background: darken($white, 10%);
-  overflow: auto;
 }

@@ -5,3 +5,6 @@
 <div class="application__header__item" ng-repeat="item in navigationItems">
   <a ui-sref="{{item.state}}" ui-sref-active="active">{{ item.label }}</a>
 </div>
+<div class="application__header__signout">
+  <a ui-sref="logout"><i class="fa fa-power-off"></i></a>
+</div>

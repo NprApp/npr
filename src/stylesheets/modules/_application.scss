@@ -34,13 +34,23 @@
         padding: 0 10px;
         color: $header-color;
         text-decoration: none;
-        text-transform: uppercase;
+        // text-transform: uppercase;
         font-weight: 500;
         font-size: 11px;
         &.active, &:hover {
           border-radius: 5px;
           color: $active-bg;
         }
+      }
+    }
+    &__signout {
+      @include absolute(top 0 right 0);
+      a {
+        display: block;
+        width: $header-height;
+        text-align: center;
+        line-height: $header-height;
+        border-left: 1px solid $border-color;
       }
     }
   }

@@ -10,7 +10,10 @@
   "strict": true,
   "undef": true,
   "unused": true,
+  "debug": false,
+  "noarg": true,
+  "strict": false,
   "globals": {
-    "angular": false
+    "angular": true
   }
 }

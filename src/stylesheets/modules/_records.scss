@@ -5,24 +5,47 @@ $record-sticker-height: 50px;
 
 $record-infertile: #056005;
 
+$breakpoint_14: '(min-width: 1280px)';
+$breakpoint_7: '(min-width: 650px) and (max-width: 1279px)';
+$breakpoint_7_up: '(min-width: 650px)';
+$breakpoint_1: '(max-width: 649px)';
+
+
 .records-list {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
   align-content: flex-start;
-  width: $recrod-width * 14 + 2;
-  margin: 10px;
+  @media #{$breakpoint_14} {
+    width: $recrod-width * 14 + 2;
+    margin: 10px auto;
+  }
+  @media #{$breakpoint_7} {
+    width: $recrod-width * 7 + 2;
+    margin: 10px auto;
+  }
+  @media #{$breakpoint_1} {
+    width: auto;
+    margin: 10px 5px;
+  }
   background: $white;
   border: 1px solid #ddd;
   border-bottom-width: 3px;
   &__item {
-    @include sizing($recrod-width $recrod-height);
-    border-right: 1px solid $border-color;
     border-bottom: 1px solid $border-color;
     position: relative;
     margin: 0px;
-    &:nth-child(14n + 7) {
-      border-right: 2px solid darken($border-color, 20%);
+    @media #{$breakpoint_14} {
+      &:nth-child(14n + 7) {
+        border-right: 2px solid darken($border-color, 20%);
+      }
+    }
+    @media #{$breakpoint_1} {
+      width: 100%;
+    }
+    @media #{$breakpoint_7_up} {
+      @include sizing($recrod-width $recrod-height);
+      border-right: 1px solid $border-color;
     }
     &:hover {
       background: darken($white, 4%);

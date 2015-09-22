@@ -71,10 +71,10 @@ module.exports = function(grunt) {
         files: ['src/stylesheets/**/*.sass', 'src/stylesheets/**/*.scss'],
         tasks: 'sass:dev',
       },
-      coffee: {
-        files: ['src/javascripts/**/*.coffee'],
-        tasks: ['coffee:dev'],
-      },
+      // coffee: {
+      //   files: ['src/javascripts/**/*.coffee'],
+      //   tasks: ['coffee:dev'],
+      // },
       ngtemplates: {
         files: ['src/javascripts/**/*.html'],
         tasks: ['ngtemplates']
@@ -83,8 +83,46 @@ module.exports = function(grunt) {
         files: ['public/css/*.css'],
         tasks: ["postcss"]
       },
+      browserify: {
+        files: ['src/javascripts/**/*.js'],
+        tasks: ['browserify']
+      },
+      ngAnnotate: {
+        files: ['public/js/module.js'],
+        tasks: ['ngAnnotate']
+      },
       gruntfile: {
         files: ['Gruntfile.js']
+      }
+    },
+
+    browserify: {
+      dist: {
+        options: {
+          browserifyOptions: {
+            debug: true
+          },
+          transform: [
+            ['babelify', {
+              stage: 0
+            }]
+          ]
+        },
+        files: {
+          "public/js/module.js": ['src/javascripts/**/*.js']
+        }
+      }
+    },
+
+    ngAnnotate: {
+      options: {
+        singleQuotes: true,
+        sourceMap: true
+      },
+      dist: {
+        files: {
+          'public/js/build.js': 'public/js/module.js'
+        }
       }
     },
 
@@ -126,39 +164,39 @@ module.exports = function(grunt) {
       }
     },
 
-    coffee: {
-      dev: {
-        files: {
-          "public/js/app.min.js": [
-            "src/javascripts/application.coffee",
-            'src/javascripts/services/base.coffee',
-            'src/javascripts/services/**/*.coffee',
-            'src/javascripts/factories/**/*.coffee',
-            'src/javascripts/directives/**/*.coffee',
-            'src/javascripts/components/**/*.coffee',
-            'src/javascripts/models/base.coffee',
-            'src/javascripts/models/**/*.coffee',
-            'src/javascripts/filters/base.coffee',
-            'src/javascripts/filters/**/*.coffee',
-            'src/javascripts/modules/**/*.coffee',
-          ]
-        }
-      },
-      prod: {
-        files: {
-          "public/js/app.js": [
-            'app/assets/javascripts/core/*',
-            'app/assets/javascripts/controllers/*',
-            'app/assets/javascripts/models/*',
-            'app/assets/javascripts/factories/*',
-            'app/assets/javascripts/components/*',
-            'app/assets/javascripts/directives/*',
-            'app/assets/javascripts/routes/*',
-            "app/assets/javascripts/application.coffee"
-          ]
-        }
-      }
-    },
+    // coffee: {
+    //   dev: {
+    //     files: {
+    //       "public/js/app.min.js": [
+    //         "src/javascripts/application.coffee",
+    //         'src/javascripts/services/base.coffee',
+    //         'src/javascripts/services/**/*.coffee',
+    //         'src/javascripts/factories/**/*.coffee',
+    //         'src/javascripts/directives/**/*.coffee',
+    //         'src/javascripts/components/**/*.coffee',
+    //         'src/javascripts/models/base.coffee',
+    //         'src/javascripts/models/**/*.coffee',
+    //         'src/javascripts/filters/base.coffee',
+    //         'src/javascripts/filters/**/*.coffee',
+    //         'src/javascripts/modules/**/*.coffee',
+    //       ]
+    //     }
+    //   },
+    //   prod: {
+    //     files: {
+    //       "public/js/app.js": [
+    //         'app/assets/javascripts/core/*',
+    //         'app/assets/javascripts/controllers/*',
+    //         'app/assets/javascripts/models/*',
+    //         'app/assets/javascripts/factories/*',
+    //         'app/assets/javascripts/components/*',
+    //         'app/assets/javascripts/directives/*',
+    //         'app/assets/javascripts/routes/*',
+    //         "app/assets/javascripts/application.coffee"
+    //       ]
+    //     }
+    //   }
+    // },
     ngtemplates: {
       'npr.app': {
         cwd: 'src/javascripts',
@@ -218,7 +256,9 @@ module.exports = function(grunt) {
   grunt.registerTask('default', [
     'sass:dev',
     'postcss:dist',
-    'coffee:dev',
+    // 'coffee:dev',
+    'browserify',
+    'ngAnnotate',
     'ngtemplates',
     'concat:dev',
     'concat:csslibs',
@@ -228,7 +268,7 @@ module.exports = function(grunt) {
   grunt.registerTask('heroku', [
     'sass:dev',
     'postcss:dist',
-    'coffee:dev',
+    // 'coffee:dev',
     'ngtemplates',
     'concat:dev',
     'concat:csslibs',
@@ -250,6 +290,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-angular-templates');
   grunt.loadNpmTasks('grunt-postcss');
+  grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-ng-annotate');
 
 
 };
