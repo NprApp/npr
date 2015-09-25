@@ -4,7 +4,7 @@
       <h5>Cards</h5>
     </div>
     <ul class="cards__list">
-      <li ng-repeat="card in items.data track by $index" ng-click="debug(card)">
+      <li ng-repeat="card in items track by $index" ng-click="debug(card)">
         <a href ui-sref="root.cards.card({id: card.id})" ui-sref-active="active">
           <span ng-show="card.min_date || card.max_date">
             {{card.min_date}} - {{card.max_date}}

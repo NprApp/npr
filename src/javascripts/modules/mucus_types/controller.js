@@ -2,7 +2,9 @@ export default class {
   /*@ngInject*/
   constructor(store) {
     this.store = store;
-    this.items = store('mucus_type').query().$object;
+    store('mucus_type').query().then((items) => {
+      this.items = items;
+    });
   }
 
   destroy(item) {

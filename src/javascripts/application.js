@@ -1,4 +1,6 @@
 require('./providers/store.js');
+require('./directives/modal/component.js');
+require('./filters/base.js');
 import HttpInterceptor from './services/http-interceptor.js';
 import ApplicationController from './modules/application/controller.js';
 import RootController from './modules/root/controller.js';
@@ -14,18 +16,17 @@ angular.module('npr.app', [
   'angular-cache',
   'underscore',
   'pg-data',
-  // 'angular-modal',
-  // 'app-filters',
+  'angular-modal',
+  'app-filters',
   'ngCookies',
   '720kb.datepicker'
 ]);
 
 angular.module('npr.app').config(
-  function($stateProvider, $urlRouterProvider, $httpProvider, storeProvider) {
+  function($stateProvider, $urlRouterProvider, $httpProvider) {
     $urlRouterProvider.otherwise('/login');
     $httpProvider.interceptors.push(HttpInterceptor);
     $httpProvider.useApplyAsync(true);
-    storeProvider.setApp('npr.app');
     $stateProvider.state({
       name: 'root',
       url: '/',

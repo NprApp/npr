@@ -1,13 +1,15 @@
 import PgDataBase from '../providers/pg-data/pg-data-base.js';
 import Base from '../providers/pg-data/model-base.js';
 
-PgDataBase.addModel('card', class extends Base {
+PgDataBase.addModel('record_type',
+  class extends Base {
     get _name() {
-      return 'card';
+      return 'record_type';
     }
     static get attributes() {
       return {
-        records: 'oneToMany'
+        name: 'String',
+        code: 'String'
       };
     }
   }

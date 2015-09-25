@@ -1,27 +1,30 @@
 export default class {
-  constructor(data) {
-    this._setProperties(data);
-    this.store = angular.injector(['pg-data']).get('store');
-    this._ = angular.injector(['pg-data']).get('_');
-
-    this._.each(this._.keys(this.attributes), (key) => {
+  static setStore(store) {
+    this.store = store;
+  }
+  static buildAttributes() {
+    this._attributes = {};
+    _.each(_.keys(this.attributes), (key) => {
       const keySplitted = this.attributes[key].split(":");
       const type = keySplitted[0];
       let foreign_key = keySplitted[1];
       if (type !== "manyToOne") {
+        this._attributes[key] = type;
         return;
       }
       if (!foreign_key) {
         foreign_key = key + "_id";
       }
-      this.attributes[foreign_key] = "integer";
+      this._attributes[foreign_key] = "integer";
     });
   }
-
-  static bindToApp(name, modelName, bindClass) {
-    angular.module(name).factory(`model.${modelName}`, function() {
-      return bindClass;
-    });
+  constructor(data) {
+    this._setProperties(data);
+    this._ = _;
+    this.store = this.constructor.store;
+  }
+  get attributes() {
+    return this.constructor._attributes;
   }
   save() {
     let data = {};
@@ -75,14 +78,17 @@ export default class {
     this._originalData = data;
   }
   _calculateRelationForBaseModel(relation) {
-    const keySplitted = this.attributes[relation].split(":");
+    if(!this.constructor.attributes[relation]) {
+      return;
+    }
+    const keySplitted = this.constructor.attributes[relation].split(":");
     const type = keySplitted[0];
     let foreign_key = keySplitted[1];
-    if (type !== "manyToOne") {
+    if (type !== 'manyToOne') {
       return;
     }
     if (!foreign_key) {
-      foreign_key = relation + "_id";
+      foreign_key = `${relation}_id`;
     }
     if (this[relation] && this[relation].id === this[foreign_key]) {
       return;
