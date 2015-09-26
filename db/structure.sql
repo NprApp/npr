@@ -35,7 +35,8 @@ SET default_with_oids = false;
 
 CREATE TABLE cards (
     id integer NOT NULL,
-    number integer
+    number integer,
+    user_id integer DEFAULT 1 NOT NULL
 );
 
 
@@ -129,7 +130,7 @@ CREATE TABLE records (
     date date NOT NULL,
     type_id integer NOT NULL,
     bleeding_type text,
-    peak_day integer,
+    peak_day boolean,
     mucus_type_id integer,
     frequency integer,
     details text
@@ -315,6 +316,14 @@ ALTER TABLE ONLY users
 
 
 --
+-- Name: cards_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY cards
+    ADD CONSTRAINT cards_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
 -- Name: records_card_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -349,3 +358,5 @@ INSERT INTO "schema_migrations" ("filename") VALUES ('20150712201138_change_mucu
 INSERT INTO "schema_migrations" ("filename") VALUES ('20150822195932_add_details_to_record.rb');
 INSERT INTO "schema_migrations" ("filename") VALUES ('20150827191040_create_users.rb');
 INSERT INTO "schema_migrations" ("filename") VALUES ('20150901194549_add_comfirmable_to_users.rb');
+INSERT INTO "schema_migrations" ("filename") VALUES ('20150926192340_change_peak_day_to_boolean.rb');
+INSERT INTO "schema_migrations" ("filename") VALUES ('20150926201913_add_user_id_to_cards.rb');

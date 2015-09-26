@@ -54,8 +54,9 @@ export default class {
   destroy() {
     this.$isDestroyed = true;
     this._willDestroy();
-    this.store(this._name).destroy(this.id).then(() => {
+    return this.store(this._name).destroy(this.id).then((data) => {
       this._afterDestroy();
+      return data;
     });
   }
   reject() {

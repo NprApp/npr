@@ -2,62 +2,92 @@ import BleedingTypes from '../../factories/bleeding-types.js';
 
 export default class {
   /*@ngInject*/
-  constructor($scope, $timeout, store, record_types, mucus_types, records, $stateParams) {
-    $scope.model = store('card').get($stateParams.id);
-    $scope.types = record_types;
-    $scope.mucus_types = mucus_types;
-    $scope.records = records;
-    $scope.bleeding_types = BleedingTypes;
-    $scope.view = {};
-    $scope.cancel = function() {
-      $scope.current.reject();
-      $scope.view.newModalVisible = false;
-    };
-    $scope.save = function() {
-      var isNew;
-      isNew = $scope.current.isNew();
-      return $scope.current.save().then(function(data) {
-        if (isNew) {
-          $scope.records.push($scope.current);
-        }
-        $scope.view.newModalVisible = false;
-        // $timeout(function() {});
-        return data;
-      });
-    };
-    $scope.destroy = function(record) {
-      record.destroy().then((data) => {
-        const index = $scope.records.indexOf(record);
-        if (index > -1) {
-          $scope.records.splice(index, 1);
-        }
-        $timeout(function() {}, 800);
-        return data;
-      });
-    };
-    $scope.new = function() {
-      var maxDate;
-      maxDate = $scope.records.map(function(record) {
-        return record.date;
-      }).sort().reverse()[0];
-      $scope.current = store('record').createRecord({
-        date: moment(maxDate).add(1, 'day').format('YYYY-MM-DD'),
-        card_id: $stateParams.id,
-        frequency: 1
-      });
-      $scope.view.newModalVisible = true;
-    };
-    $scope.edit = function(record) {
-      if (record.$isDestroyed) {
-        return;
+  constructor($scope, store, record_types, mucus_types, records, $stateParams) {
+    this.card_id = $stateParams.id;
+    this.store = store;
+    this.model = this.store('card').get(this.card_id);
+    this.duration = moment(this.model.max_date).diff(this.model.min_date, 'days');
+    this.types = record_types;
+    this.mucus_types = mucus_types;
+    this.records = records;
+    this._prepareDays();
+    this.bleeding_types = BleedingTypes;
+    $scope.$watch('card.current.mucus_type.symbol', this._mucusTypeWatcher.bind(this));
+  }
+
+  _prepareDays() {
+    this.days = [];
+    this.map = {};
+    const dates = this.records.map(record => {
+      this.map[record.date] = record;
+      return record.date
+    }).sort();
+    const minDate = dates[0];
+    const maxDate = dates[dates.length - 1];
+    let size = moment(maxDate).diff(minDate, 'days') + 1;
+    let date = moment(minDate);
+    while(size > 0) {
+      let formattedDate = date.format("YYYY-MM-DD");
+      this.days.push(this.map[formattedDate] || {date: formattedDate, blank: true});
+      date.add(1, 'day');
+      size--;
+    }
+  }
+
+  _mucusTypeWatcher() {
+    if(this.current && this.current.mucus_type && this.current.mucus_type.symbol === '0') {
+      this.current.frequency = 0;
+    }
+  }
+
+  cancel() {
+    if(this.current && this.current.reject) {
+      this.current.reject();
+    }
+    this.newModalVisible = false;
+  }
+
+  save() {
+    var isNew;
+    isNew = this.current.isNew();
+    return this.current.save().then(() => {
+      if (isNew) {
+        this.records.push(this.current);
       }
-      $scope.current = record;
-      $scope.view.newModalVisible = true;
-    };
-    return $scope.$watch('current.mucus_type.symbol', function() {
-      if( $scope.current && $scope.current.mucus_type && $scope.current.mucus_type.symbol === '0') {
-        $scope.current.frequency = 0;
+      this._prepareDays();
+      this.newModalVisible = false;
+    });
+  }
+
+  destroy(record) {
+    record.destroy().then(() => {
+      const index = this.records.indexOf(record);
+      if (index > -1) {
+        this.records.splice(index, 1);
+        this._prepareDays();
       }
     });
+  }
+
+  new(date) {
+    const maxDate = date || this.records.map(record => record.date).sort().reverse()[0];
+    this.current = this.store('record').createRecord({
+      date: moment(maxDate).add(1, 'day').format('YYYY-MM-DD'),
+      'card_id': this.card_id,
+      frequency: 1
+    });
+    this.newModalVisible = true;
+  }
+
+  edit(record) {
+    if (record.$isDestroyed) {
+      return;
+    }
+    if(record.blank) {
+      this.new(record.date);
+    } else {
+      this.current = record;
+      this.newModalVisible = true;
+    }
   }
 }

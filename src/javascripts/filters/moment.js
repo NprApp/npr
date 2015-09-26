@@ -1,6 +1,6 @@
 angular.module('app-filters').filter('moment', function() {
   return function(date, format) {
-    return moment(date).format();
+    return moment(date).format(format);
   };
 }).filter('recordDayOfMonth', function() {
   return function(date) {

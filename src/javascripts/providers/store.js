@@ -11,7 +11,6 @@ angular.module('pg-data').config(function($httpProvider) {
 angular.module('pg-data').provider('store', class storeClass {
   /*@ngInject*/
   constructor() {
-    console.log('store', this);
     PgDataBase.setStore(this.getFn.bind(this));
     this._map = {};
   }
@@ -52,6 +51,8 @@ angular.module('pg-data').directive('bindRelation', function($parse, $compile, _
           // $timeout(() => {
           foreign_key = bindModel._calculateRelationForBaseModel(value);
           // });
+        } else {
+          return;
         }
         if(foreign_key) {
           scope.$watch(`${binding}.${foreign_key}`, function() {

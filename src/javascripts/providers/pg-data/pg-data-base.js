@@ -44,7 +44,7 @@ export default class {
     return this._http.put(this._buildUrl({id}), data);
   }
   destroy(id) {
-    return this._http.delete(this._buildUrl(id));
+    return this._http.delete(this._buildUrl({id}));
   }
   query(params, reload) {
     let promise;

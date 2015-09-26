@@ -1,5 +1,7 @@
-  <div class="records-list">
-  <div class="records-list__item" ng-repeat="record in records track by $index" ng-class="record.record_type.code" ng-click="edit(record)">
+<div class="records-dates">{{card.model.min_date | moment:'D MMM YYYY'}} - {{card.model.max_date | moment:'D MMM YYYY'}} ({{card.duration}} days)</div>
+<div class="records-list">
+  <div class="records-list__item" ng-repeat="record in card.days track by $index" ng-class="{'records-list__item--peak': record.peak_day}" ng-click="card.edit(record)">
+
     <bind-relation key="record.mucus_type"></bind-relation>
     <bind-relation key="record.record_type.symbol"></bind-relation>
     <div class="records-list__item--date">
@@ -13,29 +15,33 @@
         {{ record.date | recordDayOfWeek}}
       </div>
     </div>
-    <div class="records-list__item--destroy" ng-click="destroy(record)">&times;</div>
-    <div class="records-list__item--sticker"></div>
-    <div class="records-list__item--bleeding-type">
-      <span ng-show="record.record_type.code == 'bleeding'">
-        {{ record.bleeding_type }}
-      </span>
+    <div class="records-list__blank-item" ng-if="record.blank">
     </div>
-    <div class="records-list__item--mucus-type">
-      <span ng-hide="record.mucus_type.symbol == '0'">
-        {{ record.mucus_type.symbol }}
-      </span>
-      <span ng-show="(record.mucus_type.symbol || '0') == '0'">
-        0AD
-      </span>
-    </div>
-    <div class="records-list__item--frequency" ng-hide="(record.frequency || 0) == 0">
-      X{{ record.frequency }}
-    </div>
-    <div class="records-list__item--frequency" ng-show="(record.frequency || 0) == 0 && record.mucus_type.symbol != '0'">
-      AD
+    <div ng-if="!record.blank">
+      <div class="records-list__item--destroy" ng-click="card.destroy(record)">&times;</div>
+      <div class="records-list__item--sticker" ng-class="record.record_type.code"></div>
+      <div class="records-list__item--bleeding-type">
+        <span ng-show="record.record_type.code == 'bleeding'">
+          {{ record.bleeding_type }}
+        </span>
+      </div>
+      <div class="records-list__item--mucus-type">
+        <span ng-hide="record.mucus_type.symbol == '0'">
+          {{ record.mucus_type.symbol }}
+        </span>
+        <span ng-show="(record.mucus_type.symbol || '0') == '0'">
+          0AD
+        </span>
+      </div>
+      <div class="records-list__item--frequency" ng-hide="(record.frequency || 0) == 0">
+        X{{ record.frequency }}
+      </div>
+      <div class="records-list__item--frequency" ng-show="(record.frequency || 0) == 0 && record.mucus_type.symbol != '0'">
+        AD
+      </div>
     </div>
   </div>
-  <div class="records-list__item records-list__item--new" ng-click="new()">
+  <div class="records-list__item records-list__item--new" ng-click="card.new()">
   </div>
 </div>
-<ui-modal toggler="view.newModalVisible" ok-action="save" cancel-action="cancel" src="modules/card/views/form.html"></ui-modal>
+<ui-modal toggler="card.newModalVisible" ok-action="card.save" cancel-action="card.cancel" src="modules/card/views/form.html"></ui-modal>
