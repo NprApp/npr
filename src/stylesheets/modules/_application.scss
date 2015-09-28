@@ -1,3 +1,5 @@
+$mobile: '(max-width: 649px)';
+
 .application {
   @include fill-absolute();
   display: flex;
@@ -23,6 +25,12 @@
         font-size: 10px;
         font-weight: 600;
       }
+      @media #{$mobile} {
+        display: none;
+      }
+    }
+    @media #{$mobile} {
+      padding-left: 10px;
     }
     &__item {
       display: inline-block;
@@ -49,6 +57,9 @@
         line-height: $header-height;
         padding: 0 10px;
         color: darken($white, 20%);
+        @media #{$mobile} {
+          display: none;
+        }
       }
       a {
         @include absolute(top 0 right 0);

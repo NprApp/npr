@@ -76,6 +76,13 @@ $breakpoint_1: '(max-width: 649px)';
       position: relative;
       padding: 3px 5px;
       text-align: center;
+      @media #{$breakpoint_1} {
+        display: inline-block;
+        width: 30px;
+        + div {
+          display: inline-block;
+        }
+      }
       &-day-of-month {
         font-size: 15px;
         font-weight: 600;
@@ -104,7 +111,10 @@ $breakpoint_1: '(max-width: 649px)';
     &--sticker {
       height: $record-sticker-height;
       margin: 0px 0px;
-
+      @media #{$breakpoint_1} {
+        display: inline-block;
+        width: 50px;
+      }
       &.bleeding {
         background: $brand-danger;
         border-color: darken($brand-danger, 10px);
@@ -152,16 +162,33 @@ $breakpoint_1: '(max-width: 649px)';
       text-align: center;
       font-size: 16px;
       height: 26px;
+      @media #{$breakpoint_1} {
+        display: inline-block;
+        width: 50px;
+      }
     }
     &--mucus-type {
       text-align: center;
       font-size: 14px;
       font-weight: 600;
+      @media #{$breakpoint_1} {
+        display: inline-block;
+        width: 50px;
+      }
     }
     &--frequency {
       text-align: center;
       font-size: 14px;
       font-weight: 600;
+      @media #{$breakpoint_1} {
+        display: inline-block;
+        width: 50px;
+      }
+    }
+    &--new {
+      @media #{$breakpoint_1} {
+        height: $record-sticker-height;
+      }
     }
   }
 }
