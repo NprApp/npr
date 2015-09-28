@@ -1,4 +1,4 @@
-export default function() {
-  this.title = 'NPR Application';
-  return this;
+export default function(store) {
+  this.title = 'NFP - Natural Family Planning';
+  store('user').get('current');
 }

@@ -2,9 +2,10 @@
   <div class="lighter">NFP</div>
   <div class="sub-bolder">Natural Family Planning {{tada}}</div>
 </div>
-<div class="application__header__item" ng-repeat="item in navigationItems">
+<div class="application__header__item" ng-repeat="item in root.navigationItems | access">
   <a ui-sref="{{item.state}}" ui-sref-active="active">{{ item.label }}</a>
 </div>
 <div class="application__header__signout">
+  <span>{{ root.currentUser.email }}</span>
   <a ui-sref="logout"><i class="fa fa-power-off"></i></a>
 </div>

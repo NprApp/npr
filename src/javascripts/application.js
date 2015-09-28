@@ -6,6 +6,7 @@ import ApplicationController from './modules/application/controller.js';
 import RootController from './modules/root/controller.js';
 import LoginController from './modules/login/controller.js';
 import LogoutController from './modules/logout/controller.js';
+import SignUpController from './modules/sign_up/controller.js';
 import AuthService from './services/auth.js';
 
 angular.module('npr.app', [
@@ -31,6 +32,7 @@ angular.module('npr.app').config(
       name: 'root',
       url: '/',
       controller: RootController,
+      controllerAs: 'root',
       templateUrl: 'modules/root/template.html'
     });
     $stateProvider.state({
@@ -43,6 +45,13 @@ angular.module('npr.app').config(
       name: 'logout',
       url: '/logout',
       controller: LogoutController
+    });
+    $stateProvider.state({
+      name: 'sign_up',
+      url: '/sign_up',
+      controller: SignUpController,
+      controllerAs: 'vm',
+      templateUrl: 'modules/sign_up/template.html'
     });
   }
 );

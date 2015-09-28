@@ -44,8 +44,14 @@
       }
     }
     &__signout {
-      @include absolute(top 0 right 0);
+      span {
+        @include absolute(top 0 right $header-height);
+        line-height: $header-height;
+        padding: 0 10px;
+        color: darken($white, 20%);
+      }
       a {
+        @include absolute(top 0 right 0);
         display: block;
         width: $header-height;
         text-align: center;

@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   def show
-    render json: User[params[:id]]
+    if(params[:id] == 'current')
+      render json: current_user
+    else
+      render json: User[params[:id]]
+    end
   end
 
   def new

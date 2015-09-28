@@ -1,6 +1,7 @@
 class User < Sequel::Model
   plugin :devise
   one_to_many :cards
+  acts_as_token_authenticatable
   devise :database_authenticatable, :timeoutable, :trackable, :registerable, :confirmable, :validatable
 
   def self.find_first_by_auth_conditions(warden_conditions)

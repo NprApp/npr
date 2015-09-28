@@ -1,4 +1,4 @@
-export default function($scope, $http, $cookies, $state) {
+export default function($scope, $http, $cookies, $state, store) {
   'ngInject';
   if ($cookies.get('xUserToken') && $cookies.get('xUserEmail')) {
     $state.transitionTo('root.cards');
@@ -10,6 +10,7 @@ export default function($scope, $http, $cookies, $state) {
     }).then(function(result) {
       $cookies.put('xUserEmail', result.data.user_email);
       $cookies.put('xUserToken', result.data.user_token);
+      store('user').get('current', true);
       $state.transitionTo('root.cards');
     })['catch'](function(reason) {
       $scope.userError = reason.data.error;

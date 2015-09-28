@@ -1,6 +1,7 @@
 import NavigationItems from '../../factories/navigation-items.js';
 
-export default function($scope) {
+export default function(store) {
   'ngInject';
-  $scope.navigationItems = NavigationItems;
+  this.currentUser = store('user').get('current');
+  this.navigationItems = NavigationItems;
 }

@@ -5,10 +5,6 @@ class SessionsController < Devise::SessionsController
     render json: {}
   end
 
-  def redirect_ul
-    binding.pry
-  end
-
   def create
     self.resource = warden.authenticate(auth_options)
     unless self.resource.present?

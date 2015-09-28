@@ -13,6 +13,9 @@
       <div ng-if="userError" class="alert alert-danger sign_in_form__alert">
         {{ userError }}
       </div>
+      <div>
+        Don't have an account? <a ui-sref="sign_up">Sign up!</a>
+      </div>
       <button type="submit" class="btn btn-primary btn-block sign_in_form__submit" ng-disabled="!signInForm.$valid">Sign In</button>
     </form>
   </div>
