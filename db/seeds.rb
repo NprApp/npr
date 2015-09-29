@@ -6,15 +6,20 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-RecordType.find_or_create name: "Bleeding", code: "bleeding"
-RecordType.find_or_create name: "Fertile", code: "fertile"
-RecordType.find_or_create name: "Infertile", code: "infertile"
-
-MucusType.find_or_create symbol: "10KL" do |type|
-  type.fertile = true
-  type.peak_type = true
+seeds = YAML.load(File.read('./db/seeds.yml'))
+seeds[:record_types].each do |type|
+  record_type = RecordType.find_or_create code: type[:code] do |record|
+    record.name = type[:name]
+  end
+  record_type.name = type[:name]
+  record_type.save
 end
-MucusType.find_or_create symbol: "8KL" do |type|
-  type.fertile = true
-  type.peak_type = true
+seeds[:mucus_types].each do |type|
+  mucus_type = MucusType.find_or_create symbol: type[:symbol] do |record|
+    record.fertile = type[:fertile]
+    record.peak_type = type[:peak_type]
+  end
+  mucus_type.fertile = type[:fertile]
+  mucus_type.peak_type = type[:peak_type]
+  mucus_type.save
 end

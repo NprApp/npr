@@ -1,0 +1,36 @@
+:record_types:
+  - :code: 'fertile'
+    :name: 'Fertile'
+  - :code: 'infertile'
+    :name: 'Infertile'
+  - :code: 'bleeding'
+    :name: 'Bleeding'
+  - :code: 'yellow'
+    :name: 'Yellow'
+  - :code: 'brown'
+    :name: 'brown'
+:mucus_types:
+  - :symbol: '0'
+    :fertile: false
+    :peak_type: false
+  - :symbol: 6C
+    :fertile: false
+    :peak_type: false
+  - :symbol: 8C
+    :fertile: true
+    :peak_type: false
+  - :symbol: 10KL
+    :fertile: true
+    :peak_type: true
+  - :symbol: 10C/KL
+    :fertile: true
+    :peak_type: false
+  - :symbol: 10C
+    :fertile: true
+    :peak_type: false
+  - :symbol: 10K
+    :fertile: true
+    :peak_type: false
+  - :symbol: 8KL
+    :fertile: true
+    :peak_type: true
