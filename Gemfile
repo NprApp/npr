@@ -30,6 +30,7 @@ gem 'sequel-devise'
 gem 'orm_adapter'
 gem 'orm_adapter-sequel'
 gem 'konf'
+gem 'passenger'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
