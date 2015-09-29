@@ -8,6 +8,6 @@ class CardsController < ApplicationController
   end
 
   def create
-    render json: Card.create(number: (Card.max(:number) || 0) + 1)
+    render json: Card.create(number: (Card.max(:number) || 0) + 1, user: current_user)
   end
 end
