@@ -13,7 +13,6 @@ angular.module('npr.app', [
   'ui.router',
   'ngResource',
   'ngAnimate',
-  'restangular',
   'angular-cache',
   'underscore',
   'pg-data',

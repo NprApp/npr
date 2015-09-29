@@ -222,7 +222,6 @@ module.exports = function(grunt) {
           'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
           'bower_components/angular-loading-bar/build/loading-bar.min.js',
           'bower_components/angular-underscore-module/angular-underscore-module.js',
-          'bower_components/restangular/dist/restangular.js',
           'bower_components/toastr/toastr.min.js',
           'bower_components/moment/min/moment-with-locales.js',
           'bower_components/jquery-mousewheel/jquery.mousewheel.min.js',
