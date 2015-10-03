@@ -1,15 +1,15 @@
 export default [
   {
     state: 'root.cards',
-    label: 'Cards',
+    label: 'cards',
     access: 'all'
   }, {
     state: 'root.mucus_types',
-    label: 'Mucus types',
+    label: 'mucus_types',
     access: 'admin'
   }, {
     state: 'root.record_types',
-    label: 'Record types',
+    label: 'record_types',
     access: 'admin'
   }
 ];

@@ -1,4 +1,5 @@
 function accessFilter(store) {
+  /*@ngInject*/
   return function(items) {
     let result = [];
     let currentUser = store('user').get('current');
@@ -10,7 +11,6 @@ function accessFilter(store) {
     return result;
   };
 }
-
 
 angular.module('app-filters', []);
 

@@ -11,13 +11,28 @@ $cards-width: 220px;
 .cards {
   position: relative;
   margin: 0 auto;
-  max-width: 960px;
+  max-width: $cards-width;
   &__title {
+    position: relative;
     padding: 0 10px;
     h5 {
       font-size: 26px;
       font-weight: 300;
       color: #555;
+    }
+  }
+  &__new {
+    @include circle(30px);
+    @include absolute(top 0 right 0);
+    line-height: 30px;
+    text-align: center;
+    font-weight: 700;
+    background: $base-color;
+    color: $white;
+    cursor: pointer;
+    &:hover {
+      background: $white;
+      color: $base-color;
     }
   }
   &--create {
@@ -27,7 +42,7 @@ $cards-width: 220px;
     max-width: 960px;
     background: $white;
     border: 1px solid $border-color;
-    box-shadow: 0 3px 5px 0 rgba($black, .2);
+    box-shadow: 0 2px 1px 0 rgba($black, .3);
     margin: 0;
     padding: 0;
     list-style: none;

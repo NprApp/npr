@@ -1,9 +1,9 @@
 <div class="application__header__logo">
-  <div class="lighter">NFP</div>
-  <div class="sub-bolder">Natural Family Planning {{tada}}</div>
+  <div class="lighter">planuj<strong>dzieci</strong>.pl</div>
+  <div class="sub-bolder"></div>
 </div>
 <div class="application__header__item" ng-repeat="item in root.navigationItems | access">
-  <a ui-sref="{{item.state}}" ui-sref-active="active">{{ item.label }}</a>
+  <a ui-sref="{{item.state}}" ui-sref-active="active">{{ item.label | i18n }}</a>
 </div>
 <div class="application__header__signout">
   <span>{{ root.currentUser.email }}</span>

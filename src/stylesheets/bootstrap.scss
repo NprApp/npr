@@ -1,5 +1,17 @@
+$text-color: #456;
+$alert-danger-bg: #d9534f;
+$alert-danger-text: #fff;
+$alert-danger-border: darken(#d9534f, 10%);
 @import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap";
 
 .form-control {
   box-shadow: none;
+}
+
+.btn-primary-outline {
+  @include button-variant($btn-primary-bg, #fff, $btn-primary-bg);
+  &:hover {
+    background: $btn-primary-bg;
+    color: #fff;
+  }
 }

@@ -48,17 +48,14 @@ angular.module('pg-data').directive('bindRelation', function($parse, $compile, _
         const binding = keys.slice(0, index).join('.');
         let bindModel = $parse(binding)(scope);
         if(bindModel && bindModel._calculateRelationForBaseModel) {
-          // $timeout(() => {
           foreign_key = bindModel._calculateRelationForBaseModel(value);
-          // });
         } else {
           return;
         }
         if(foreign_key) {
           scope.$watch(`${binding}.${foreign_key}`, function() {
-            // $timeout(() => {
-              bindModel._calculateRelationForBaseModel(value);
-            // });
+            let bindModel = $parse(binding)(scope);
+            bindModel._calculateRelationForBaseModel(value);
           });
         }
       });

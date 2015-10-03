@@ -1,19 +1,20 @@
-<div class="sign_in_wrapper">
-  <div class="sign_in_form">
-    <div class="sign_in_form__welcome">Sign up!</div>
+<div class="sign-in-wrapper">
+  <div class="sign-in-form">
+    <div class="sign-in-form__welcome">{{ 'sign_up' | i18n }}!</div>
     <form ng-submit="vm.signUp()" name="signUpForm">
-      <div class="sign_in_form__fields">
-        <input class="form-control" ng-model="vm.user.email" required placeholder="Provide email..." />
-        <input class="form-control" type="password" ng-model="vm.user.password" required placeholder="Provide password..." />
-        <input class="form-control" type="password" ng-model="vm.user.password_confirmation" required placeholder="Confirm password..." />
+      <div class="sign-in-form__fields">
+        <input class="sign-in-form__input" ng-model="vm.user.email" required placeholder="{{ 'provide_email' | i18n }}..." />
+        <input class="sign-in-form__input" type="password" ng-model="vm.user.password" required placeholder="{{ 'provide_password' | i18n }}..." />
+        <input class="sign-in-form__input" type="password" ng-model="vm.user.password_confirmation" required placeholder="{{ 'confirm_password' | i18n }}..." />
       </div>
-      <div ng-if="vm.error" class="alert alert-danger sign_in_form__alert">
-        {{ vm.error }}
+      <div ng-if="vm.error" class="alert alert-danger sign-in-form__alert">
+        {{ vm.error | i18n }}
       </div>
-      <div>
-        Aleady have an account? <a ui-sref="login">Sign in!</a>
-      </div>
-      <button type="submit" class="btn btn-primary btn-block sign_in_form__submit" ng-disabled="!signUpForm.$valid">Sign Up</button>
+      <button type="submit" class="btn btn-primary btn-block sign-in-form__submit" ng-disabled="!signUpForm.$valid">{{ 'sign_up' | i18n }}</button>
+      <a class="btn btn-info btn-block" ui-sref="login">
+        {{ 'already_have_account' | i18n }}
+        {{ 'sign_in' | i18n }}!
+      </a>
     </form>
   </div>
 </div>

@@ -1,6 +1,6 @@
 <div class="form-group">
   <label class="control-label">
-    Date
+    {{ 'date' | i18n }}
   </label>
   <datepicker>
     <input ng-model="card.current.date" class="form-control" />
@@ -8,7 +8,7 @@
 </div>
 <div class="form-group">
   <label class="control-label">
-    Type
+    {{ 'type' | i18n }}
   </label>
   <select class="form-control" ng-options="type.id as type.name for type in card.types" ng-model="card.current.type_id">
   </select>
@@ -16,14 +16,14 @@
 <bind-relation key="card.current.record_type" />
 <div class="form-group" ng-show="card.current.record_type.code == 'bleeding'">
   <label class="control-label">
-    Bleeding type
+    {{ 'bleeding_type' | i18n }}
   </label>
   <select class="form-control" ng-model="card.current.bleeding_type" ng-options="type as type for type in card.bleeding_types">
   </select>
 </div>
 <div class="form-group">
   <label class="control-label">
-    Mucus type
+    {{ 'mucus_type' | i18n }}
   </label>
   <select class="form-control" ng-options="type.id as type.symbol for type in card.mucus_types" ng-model="card.current.mucus_type_id">
   </select>
@@ -31,7 +31,7 @@
 <bind-relation key="card.current.mucus_type" />
 <div class="form-group">
   <label class="control-label">
-    Frequency
+    {{ 'frequency' | i18n }}
   </label>
   <div>
     <div class="btn-group">
@@ -57,7 +57,7 @@
 </div>
 <div class="form-group">
   <label class="control-label">
-    Notes
+    {{ 'notes' | i18n }}
   </label>
   <textarea class="form-control" ng-model="card.current.details">
   </textarea>

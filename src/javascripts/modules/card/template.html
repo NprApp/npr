@@ -1,4 +1,4 @@
-<div class="records-dates">{{card.model.min_date | moment:'D MMM YYYY'}} - {{card.model.max_date | moment:'D MMM YYYY'}} ({{card.duration}} days)</div>
+<div class="records-dates">{{card.model.min_date | moment:'D MMM YYYY'}} - {{card.model.max_date | moment:'D MMM YYYY'}} ({{card.duration}} {{ 'days' | i18n }})</div>
 <div class="records-list">
   <div class="records-list__item" ng-repeat="record in card.days track by $index" ng-class="{'records-list__item--peak': record.peak_day}" ng-click="card.edit(record)">
 

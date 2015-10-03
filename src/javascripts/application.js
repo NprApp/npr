@@ -1,6 +1,7 @@
 require('./providers/store.js');
 require('./directives/modal/component.js');
 require('./filters/base.js');
+// require('./services/locales.js');
 import HttpInterceptor from './services/http-interceptor.js';
 import ApplicationController from './modules/application/controller.js';
 import RootController from './modules/root/controller.js';
@@ -19,14 +20,16 @@ angular.module('npr.app', [
   'angular-modal',
   'app-filters',
   'ngCookies',
+  'i18n',
   '720kb.datepicker'
 ]);
 
 angular.module('npr.app').config(
-  function($stateProvider, $urlRouterProvider, $httpProvider) {
+  function($stateProvider, $urlRouterProvider, $httpProvider, currentLocaleProvider) {
     $urlRouterProvider.otherwise('/login');
     $httpProvider.interceptors.push(HttpInterceptor);
     $httpProvider.useApplyAsync(true);
+    currentLocaleProvider.setLocale('pl');
     $stateProvider.state({
       name: 'root',
       url: '/',

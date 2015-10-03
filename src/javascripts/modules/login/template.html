@@ -1,22 +1,23 @@
-<div class="sign_in_wrapper">
-  <div class="sign_in_form">
-    <div class="sign_in_form__logo">
-      <div class="sign_in_form__logo--main">NPR</div>
-      <div class="sign_in_form__logo--sub">Track Your Fertility</div>
+<div class="sign-in-wrapper">
+  <div class="sign-in-form">
+    <div class="sign-in-form__logo">
+      <div class="sign-in-form__logo--main">Planuj<strong>Dzieci</strong>.pl</div>
+      <div class="sign-in-form__logo--sub"></div>
     </div>
-    <div class="sign_in_form__welcome">Welcome! Please signin</div>
+    <div class="sign-in-form__welcome">{{ 'welcome_text' | i18n }}</div>
     <form ng-submit="signIn()" name="signInForm">
-      <div class="sign_in_form__fields">
-        <input class="form-control" ng-model="user.email" type="email" name="email" required placeholder="Enter email..." />
-        <input class="form-control" type="password" ng-model="user.password" required placeholder="Enter password..." />
+      <div class="sign-in-form__fields">
+        <input class="sign-in-form__input" ng-model="user.email" type="email" name="email" required placeholder="{{ 'enter_email_placeholder' | i18n }}..." />
+        <input class="sign-in-form__input" type="password" ng-model="user.password" required placeholder="{{ 'enter_password_placeholder' | i18n }}..." />
       </div>
-      <div ng-if="userError" class="alert alert-danger sign_in_form__alert">
-        {{ userError }}
+      <div ng-if="userError" class="alert alert-danger sign-in-form__alert">
+        {{ userError | i18n }}
       </div>
-      <div>
-        Don't have an account? <a ui-sref="sign_up">Sign up!</a>
-      </div>
-      <button type="submit" class="btn btn-primary btn-block sign_in_form__submit" ng-disabled="!signInForm.$valid">Sign In</button>
+      <button type="submit" class="btn btn-primary btn-block sign-in-form__submit" ng-disabled="!signInForm.$valid">{{ 'sign_in' | i18n }}</button>
+      <a class="btn btn-info btn-block" ui-sref="sign_up">
+        {{ 'dont_have_account' | i18n }}
+        {{ 'sign_up' | i18n }}!
+      </a>
     </form>
   </div>
 </div>

@@ -15,15 +15,9 @@ $mobile: '(max-width: 649px)';
       @include absolute(top 0 left 0);
       padding-left: 10px;
       .lighter {
-        line-height: $header-height * .7;
+        line-height: $header-height;
         font-size: 20px;
         font-weight: 300;
-      }
-      .sub-bolder {
-        line-height: $header-height * .3;
-        margin-top: -10px;
-        font-size: 10px;
-        font-weight: 600;
       }
       @media #{$mobile} {
         display: none;
@@ -36,18 +30,17 @@ $mobile: '(max-width: 649px)';
       display: inline-block;
       padding: 0 3px;
       a {
+        background: $base-color;
+        color: $white;
+        border-radius: 3px;
         line-height: $header-height - 16;
         margin: 8px 0;
         display: block;
         padding: 0 10px;
-        color: $header-color;
         text-decoration: none;
-        // text-transform: uppercase;
-        font-weight: 500;
-        font-size: 11px;
         &.active, &:hover {
           border-radius: 5px;
-          color: $active-bg;
+          background: $active-bg;
         }
       }
     }
@@ -56,18 +49,20 @@ $mobile: '(max-width: 649px)';
         @include absolute(top 0 right $header-height);
         line-height: $header-height;
         padding: 0 10px;
-        color: darken($white, 20%);
+        color: $base-color;
         @media #{$mobile} {
           display: none;
         }
       }
       a {
-        @include absolute(top 0 right 0);
+        @include absolute(top 8px right 8px);
+        @include sizing($header-height - 16);
         display: block;
-        width: $header-height;
         text-align: center;
-        line-height: $header-height;
-        border-left: 1px solid $border-color;
+        line-height: $header-height - 16;
+        color: $white;
+        background: $base-color;
+        border-radius: 3px;
       }
     }
   }

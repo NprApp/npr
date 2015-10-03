@@ -1,7 +1,8 @@
 <div class="cards-wrapper" ui-view>
   <div class="cards">
     <div class="cards__title">
-      <h5>Cards</h5>
+      <h5>{{ 'cards' | i18n }}</h5>
+      <div class="cards__new ng-click="create()">+</div>
     </div>
     <ul class="cards__list">
       <li ng-repeat="card in items track by $index" ng-click="debug(card)">
@@ -10,11 +11,10 @@
             {{card.min_date}} - {{card.max_date}}
           </span>
           <span ng-hide="card.min_date || card.max_date">
-            No records
+            {{ 'no_records' | i18n }}
           </span>
         </a>
       </li>
-      <li class="cards__list--new"><a href ng-click="create()">Add new +</a></li>
     </ul>
   </div>
 <div>

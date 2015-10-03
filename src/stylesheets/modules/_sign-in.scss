@@ -1,18 +1,20 @@
-$sign_in_background: #eee;
+$sign_in_background: #567;
 $sign_in_width: 450px;
 
-.sign_in_wrapper {
+.sign-in-wrapper {
   @include fill-absolute();
   background: $sign_in_background;
   display: flex;
   align-items: center;
 }
 
-.sign_in_form {
+.sign-in-form {
   width: $sign_in_width;
-  padding: 10px;
+  border-radius: 2px;
+  padding: 30px;
   border: 1px solid #ddd;
   background: $white;
+  box-shadow: rgba($black, .4) 0 2px 1px 0;
   margin: 0 auto;
   &__logo {
     padding: 15px 0;
@@ -20,7 +22,6 @@ $sign_in_width: 450px;
     &--main {
       font-size: 32px;
       font-weight: 300;
-      color: #555;
       line-height: 18px;
     }
     &--sub {
@@ -35,16 +36,22 @@ $sign_in_width: 450px;
   }
   &__fields {
     padding: 15px 0;
-    .form-control {
-      border-radius: 0;
-      border-bottom-width: 0;
-      &:first-child {
-        border-radius: 5px 5px 0 0;
-      }
-      &:last-child {
-        border-radius: 0 0 5px 5px;
-        border-bottom-width: 1px;
-      }
+  }
+  &__input {
+    display: block;
+    width: 100%;
+    border-width: 0 0 1px;
+    line-height: 32px;
+    padding: 10px 0;
+    font: 15px 'Open Sans', sans-serif;
+
+    transition: border .4s ease-in-out;
+    &:focus {
+      outline: none;
+      border-bottom-color: $active-bg;
     }
+  }
+  .btn {
+    padding: 10px 0;
   }
 }
