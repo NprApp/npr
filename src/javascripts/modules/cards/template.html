@@ -2,7 +2,7 @@
   <div class="cards">
     <div class="cards__title">
       <h5>{{ 'cards' | i18n }}</h5>
-      <div class="cards__new ng-click="create()">+</div>
+      <div class="cards__new" ng-click="create()">+</div>
     </div>
     <ul class="cards__list">
       <li ng-repeat="card in items track by $index" ng-click="debug(card)">
